@@ -9,9 +9,9 @@ function Header() {
             <p className='text-white font-bold'>Mapped Project</p>
           </div>
           <ul className="flex items-center gap-10 text-white">
-            <li>Articles</li>
-            <li>À propos</li>
-            <li>Contact</li>
+            <li>Géolocalisation</li>
+            <li>Cartographie</li>
+            <li>Données</li>
           </ul>
         </nav>
       </header>
