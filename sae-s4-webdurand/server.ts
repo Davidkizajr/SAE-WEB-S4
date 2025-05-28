@@ -26,16 +26,6 @@ app.get('/api', (req, res) => {
     });
 });
 
-app.get('/api/dep/:id', (req, res) => {
-    db.all("SELECT * FROM sfr_5g", [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({
-          message: 'Données récoltées !',
-          data: rows
-        });
-    });
-});
-
 app.listen(port, () => {
     console.log("Le serveur est en fonctionnement.");
 });

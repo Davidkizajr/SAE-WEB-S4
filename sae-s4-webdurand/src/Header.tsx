@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import './App.css'
 
 function Header() {
@@ -9,9 +10,15 @@ function Header() {
             <p className='text-white font-bold'>Mapped Project</p>
           </div>
           <ul className="flex items-center gap-10 text-white">
-            <li>Géolocalisation</li>
-            <li>Cartographie</li>
-            <li>Données</li>
+            <li>
+              <NavLink to="/geolocalisation">Géolocalisation</NavLink>
+            </li>
+            <li>
+              <NavLink to="/cartographie">Cartographie</NavLink>
+            </li>
+            <li>
+              <NavLink to="/donnees">Données</NavLink>
+            </li>
           </ul>
         </nav>
       </header>
