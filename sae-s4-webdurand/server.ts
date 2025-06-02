@@ -78,6 +78,19 @@ app.get("/api", (req, res) => {
   }
 });
 
+app.get("/api/pies", (req, res) => {
+  db.all(
+    "SELECT nom_reg, COUNT(*) AS positions_5g FROM sfr_5g GROUP BY nom_reg",
+    [],
+    (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({
+        pieData: rows,
+      });
+    }
+  );
+});
+
 app.listen(port, () => {
   console.log("Le serveur est en fonctionnement.");
 });
