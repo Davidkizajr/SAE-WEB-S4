@@ -13,7 +13,6 @@ function Map() {
   const [data, setData] = useState(null);
   const [latitude, setLatitude] = useState(49.871144);
   const [longitude, setLongitude] = useState(2.2641492);
-  const [zoom, setZoom] = useState(13);
 
   const MapEvents = () => {
     useMapEvents({
@@ -21,7 +20,6 @@ function Map() {
         const { lat, lng } = e.target.getCenter();
         setLatitude(lat);
         setLongitude(lng);
-        setZoom(e.target.getZoom());
       },
     });
     return null;
@@ -30,7 +28,6 @@ function Map() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(zoom);
         const response = await axios.get(
           `http://localhost:3001/api?page=1&lat=${latitude}&lon=${longitude}`
         );
@@ -40,7 +37,7 @@ function Map() {
       }
     };
     fetchData();
-  }, [latitude, longitude, zoom]);
+  }, [latitude, longitude]);
 
   return (
     <>
