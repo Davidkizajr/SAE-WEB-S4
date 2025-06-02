@@ -18,13 +18,13 @@ app.use(express.json());
 
 app.get("/api", (req, res) => {
   const page = parseInt(req.query.page as string);
-  const pageSize = 15;
+  const pageSize = 100;
 
   const offset = (page - 1) * pageSize;
 
   if (!isNaN(parseFloat(req.query.lat)) && !isNaN(parseFloat(req.query.lon))) {
     db.get(
-      "SELECT COUNT(*) AS count FROM sfr_5g WHERE latitude >= ? AND latitude < ? + 1 AND longitude >= ? AND longitude < ? + 1",
+      "SELECT COUNT(*) AS count FROM sfr_5g WHERE latitude >= ? AND latitude < ? + 0.5 AND longitude >= ? AND longitude < ? + 0.5",
       [req.query.lat, req.query.lat, req.query.lon, req.query.lon],
       (err, row) => {
         if (err) return res.status(500).json({ error: err.message });
@@ -32,7 +32,7 @@ app.get("/api", (req, res) => {
         const totalPages = Math.ceil(totalItems / pageSize);
 
         db.all(
-          "SELECT * FROM sfr_5g WHERE latitude >= ? AND latitude < ? + 1 AND longitude >= ? AND longitude < ? + 1 LIMIT ? OFFSET ?",
+          "SELECT * FROM sfr_5g WHERE latitude >= ? AND latitude < ? + 0.5 AND longitude >= ? AND longitude < ? + 0.5 LIMIT ? OFFSET ?",
           [
             req.query.lat,
             req.query.lat,
@@ -76,16 +76,6 @@ app.get("/api", (req, res) => {
       );
     });
   }
-});
-
-app.get("/api/all", (req, res) => {
-  db.all("SELECT * FROM sfr_5g", [], (err, rows) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json({
-      message: "Données récoltées !",
-      data: rows,
-    });
-  });
 });
 
 app.listen(port, () => {
