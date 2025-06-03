@@ -21,6 +21,11 @@ function Map() {
         setLatitude(lat);
         setLongitude(lng);
       },
+      moveend: (e) => {
+        const { lat, lng } = e.target.getCenter();
+        setLatitude(lat);
+        setLongitude(lng);
+      },
     });
     return null;
   };
